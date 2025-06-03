@@ -22,9 +22,8 @@ function validarIdade(idadeNum) {
             );
         }
 
-        exibirMensagem('Idade válida', 'green');
     } catch (error) {
-        exibirMensagem(error.message, 'red');
+        exibirMensagem(error.message);
 
     }
 }
