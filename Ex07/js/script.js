@@ -1,34 +1,32 @@
-function configurar() {
-    let validarBtn = document.getElementById('validarBtn');
-    let idadeInput = document.getElementById('idade');
+import CalculadoraDeIdade from './CalculadoraDeIdade.js'
 
-    if ((validarBtn instanceof HTMLButtonElement) && (idadeInput instanceof
+function configurar() {
+    let botaoCalcular = document.getElementById('calcularIdadeBtn');
+    let inputDataNascimento = document.getElementById('dataNascimento');
+
+    if ((botaoCalcular instanceof HTMLButtonElement) && (inputDataNascimento instanceof
         HTMLInputElement)) {
-            validarBtn.addEventListener('click', () => {
-                let idade = idadeInput.value;
-                validarIdade(idade);
-                idadeInput.value = '';
+            botaoCalcular.addEventListener('click', () => {
+                let idade = calcularIdade(inputDataNascimento.value);
+                exibirResultado(idade);
             });
     }
 }
 
-function validarIdade(idadeNum) {
-    try {
-        let regex = /[0-9]/g;
+function calcularIdade(dataNascimento) {
+    let calculadoraDeIdade = new CalculadoraDeIdade(dataNascimento);
+    let idade = calculadoraDeIdade.calcularIdade();
+    return idade;
 
-        if (regex.test(idadeNum)) {
-            throw new Error(
-                'Digite apenas números.'
-            );
-        }
-
-    } catch (error) {
-        exibirMensagem(error.message);
-
-    }
 }
 
-function exibirMensagem(mensagem)
+function exibirResultado(idade) {
+    let saida = document.getElementById('resultado');
+
+    if (saida instanceof HTMLParagraphElement) {
+        saida.textContent = `Voce tem ${idade} anos.`;
+    }
+}
 
 
 document.addEventListener('DOMContentLoaded',configurar);
